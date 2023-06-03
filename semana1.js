@@ -41,7 +41,7 @@ const excel = "excel1 excel2, excel3";
 
 fs.writeFileSync("excel.xls", excel); */
 
-const fs = require("fs");
+/* const fs = require("fs");
 
 const autos = [
     {
@@ -62,4 +62,30 @@ const autos = [
     }
     ]
 
-fs.writeFileSync("autos.txt", JSON.stringify(autos));
+fs.writeFileSync("autos.json", JSON.stringify(autos));
+ */
+
+// leer archivos ---
+
+/* const fs = require('fs');
+
+const autos = fs.readFileSync('autos.json', 'utf8');
+
+console.log(autos); */
+
+/* const fs = require('fs');
+
+const autos = fs.readFileSync('autos.json', 'utf8');
+
+JSON.parse(autos).forEach(auto => {
+console.log(auto)    
+}); */
+
+// importar archivos o modulos js
+
+const {saludar, darGracias} = require('./semana1B');
+
+let nombre = 'josue';
+
+saludar(nombre);
+darGracias(nombre);
