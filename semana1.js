@@ -83,9 +83,40 @@ console.log(auto)
 
 // importar archivos o modulos js
 
-const {saludar, darGracias} = require('./semana1B');
+/* const {saludar, darGracias, varciarJSON} = require('./semana1B');
 
 let nombre = 'josue';
 
 saludar(nombre);
 darGracias(nombre);
+varciarJSON('autos.json'); */
+
+/* const {createFile, readFile} = require('./semana1B');
+
+createFile('archivo1', 'todo ok');
+
+readFile('archivo1'); */
+
+/* const {saludar, darGracias} = require('./semana1B');
+
+const argumentos = process.argv.slice(2);
+
+const nombre1 = argumentos[0];
+
+const nombre2 = argumentos[1];
+
+saludar(nombre1);
+
+darGracias(nombre2); */
+
+const {createFile, readFile} = require('./semana1B');
+
+const argumentos = process.argv.slice(2);
+
+const argumento1 = argumentos[0];
+
+const argumento2 = argumentos[1];
+
+createFile(argumento1, argumento2);
+
+readFile(argumento1);
