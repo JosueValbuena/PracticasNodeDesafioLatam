@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1,
+        "nombre": "Audifonos",
+        "precio": 19990
+    },
+    {
+        "id": 2,
+        "nombre": "Mouse",
+        "precio": 32990
+    },
+    {
+        "id": 3,
+        "nombre": "Monitor",
+        "precio": 42990
+    }
+]
