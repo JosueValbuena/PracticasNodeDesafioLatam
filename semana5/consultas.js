@@ -40,8 +40,25 @@ const obtenerMedicamentosPorFiltro = async ({ stock_min, precio_max }) => {
     return medicamentos;
 }
 
+const prepararHATEOAS = (medicamentos) =>{
+    const results = medicamentos.map((ele) => {
+        return {
+            name: ele.nombre,
+            href: `/medicamentos/medicamentos/${ele.id}`
+        }
+    }).slice(0, 4);
+
+    const total = medicamentos.length;
+    const HATEOAS = {
+        total,
+        results
+    }
+    return HATEOAS;
+}
+
 module.exports = {
     obtenerMedicamentos,
     obtenerPersonal,
-    obtenerMedicamentosPorFiltro
+    obtenerMedicamentosPorFiltro,
+    prepararHATEOAS
 }
