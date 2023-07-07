@@ -34,6 +34,17 @@ router.post("/login", async (req, res) => {
     }
 })
 
+router.delete("/eventos/:id", (req, res) => {
+    try {
+        const { id } = req.params;
+        const Authorization = req.header("Authorization");
+        const token = Authorization.split("Bearer ")[1];
+        console.log(token)
+    } catch (error) {
+        res.status(error.code || 500).send(error);
+    }
+})
+
 router.get("*", (req, res) => {
     res.send("Pagina no encontrada")
 })
