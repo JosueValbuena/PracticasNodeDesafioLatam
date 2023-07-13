@@ -4,7 +4,7 @@ const cors = require("cors");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
-const { getUsuarios, getEventos, verificarCredenciales } = require("../consultas");
+const { getUsuarios, getEventos, verificarCredenciales, createUser, createEvent } = require("../consultas");
 
 router.use(cors());
 router.use(express.json());
@@ -18,6 +18,16 @@ router.get("/usuarios", async (req, res) => {
     res.json(usuarios);
 })
 
+router.post("/usuarios", async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        const consulta = await createUser(email, password);
+        res.send("Usuario creado correctamete");
+    } catch (error) {
+        res.send(error);
+    }
+})
+
 router.get("/eventos", async (req, res) => {
     try {
         const token = req.headers.authorization.split(" ")[1];
@@ -25,7 +35,20 @@ router.get("/eventos", async (req, res) => {
         const eventos = await getEventos();
         res.json(eventos);
     } catch (error) {
-        res.status(error.code || 500).json({message: "usuario no autorizado"});
+        res.status(error.code || 500).json({ message: "usuario no autorizado" });
+    }
+})
+
+router.post("/eventos", async (req, res) => {
+    try {
+        const token = req.headers.authorization.split(" ")[1];
+        jwt.verify(token, process.env.SECRET_KEY);
+        const {email} = jwt.decode(token);
+        const {titulo, descripcion, fecha, lugar} = req.body;
+        const consulta = await createEvent(titulo, descripcion, fecha, lugar);
+        res.send("evento creado correctamente por el usuario " + email);
+    } catch (error) {
+        res.status(500).json({ message: "usuario no autorizado" })
     }
 })
 
@@ -38,7 +61,7 @@ router.post("/login", async (req, res) => {
         console.log("usuario autenticado correctamente");
     } catch (error) {
         console.log(error);
-        res.status(error.code || 500).send(error)
+        res.status(error.code || 500).send({error})
     }
 })
 
