@@ -1,0 +1,11 @@
+dependencias:
+
+express (const express = require("express") / const app = expres())
+nodemon ("start": "nodemon app.js" / npm run start)
+pg (const { Poll } = require("pg") / const pool = new Pool ({...}))
+pg-format
+cors (const)
+dotenv (require("dotenv").config() / .env)
+jest ("scripts": {
+	"test": "jest" *agregar "--forceExit" si se quiere cerrar el servidor despues de ejecutar el text*
+} / npm run test)
