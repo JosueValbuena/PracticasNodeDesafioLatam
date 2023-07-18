@@ -10,7 +10,7 @@ router.use('*', (req, res) => {
     res.send("Ruta no existe");
 })
 
-const port = process.env.PORT || 3002;
+const port = process.env.PORT || 3001;
 
 app.listen(port, ()=> console.log(`Servidor iniciado en puerto ${port}`));
 

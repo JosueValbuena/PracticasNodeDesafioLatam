@@ -16,10 +16,15 @@ describe('Operaciones CRUD', ()=>{
 
     it("Enviando producto nuevo", async () => {
         const producto = { nombre: "bate", stock: 5 };
-        const { body: productos } = await request(app).post("/productos").send(producto);
-        const productoEsperado = {id: productos.id, nombre: "bate", stock: 5};
-        console.log(productos)
-        expect(productos.statusCode).toBe(200);
-        expect(productos).toContainEqual(producto);
+        const response = await request(app).post("/productos").send(producto);
+        const status = response.statusCode;
+        expect(status).toBe(200);
+        expect(response.body).toContainEqual(producto);
+    })
+
+    it("producto no existe", async () => {
+        const producto = {nombre: "guantes", stock: 15};
+        const response = await request(app).put("/productos/30").send(producto);
+        expect(response.statusCode).toBe(400);
     })
 })

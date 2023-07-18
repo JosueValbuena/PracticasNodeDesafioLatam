@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const cors = require('cors');
-const { getData, addData } = require('../consultas');
+const { getData, addData, uptadeData } = require('../consultas');
+
+router.use(express.json());
 
 router.get('/', (req, res) => {
     try {
@@ -22,11 +24,22 @@ router.get("/productos", async (req, res) => {
 
 router.post("/productos", async (req, res) => {
     try {
-        const {nombre, stock} = req.body;
-        const producto = await addData(nombre, stock);
-        res.status(200).json({mesaje: "solicitud recibida correctamente", data:req.body})   
+        const { nombre, stock } = req.body;
+        await addData(nombre, stock);
+        res.json([{ nombre, stock }])
     } catch (error) {
         res.send(error);
+    }
+})
+
+router.put("/productos/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { nombre, stock } = req.body;
+        const dataAct = await uptadeData(id, nombre, stock);
+        res.json({id, data: dataAct})
+    } catch (error) {
+        res.send(error)
     }
 })
 
