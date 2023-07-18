@@ -1,6 +1,10 @@
+iniciar un proyecto node: npm init -y
+
 dependencias:
 
-express (const express = require("express") / const app = expres())
+instalacion (npm install xxx / npm install -D xxx)
+
+express (const express = require("express") / const app = express())
 nodemon ("start": "nodemon app.js" / npm run start)
 pg (const { Poll } = require("pg") / const pool = new Pool ({...}))
 pg-format
@@ -9,3 +13,6 @@ dotenv (require("dotenv").config() / .env)
 jest ("scripts": {
 	"test": "jest" *agregar "--forceExit" si se quiere cerrar el servidor despues de ejecutar el text*
 } / npm run test)
+jsonwebtoken
+bcryptjs (const bcryptjs = require("bcryptjs"))
+supertest (const request = require('supertest'))

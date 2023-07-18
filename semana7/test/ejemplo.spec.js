@@ -1,19 +1,25 @@
-const sumar = (a, b) => a + b;
-const restar = (a, b) => a - b;
+const request = require('supertest');
+const app = require('../app.js');
 
-describe("Testin unitario con Jest", () => {
-    it("Comprobando el resultado de una sumatorio", () => {
-        const n1 = 5;
-        const n2 = 4;
-        const resultado = sumar(n1, n2);
-
-        expect(resultado).toBe(9);
+describe('Operaciones CRUD', ()=>{
+    it("Obteniendo un 200", async () => {
+        const response = await request(app).get("/productos").send();
+        const status = response.statusCode;
+        expect(status).toBe(200);
     });
-    it("Comprobando el resultado de una resta", () => {
-        const n1 = 10;
-        const n2 = 5;
-        const resultado = restar(n1, n2);
 
-        expect(resultado).toBe(5);
-    }) 
+    it("Obteniendo un producto", async () => {
+        const { body } = await request(app).get("/productos/1").send();
+        const producto = body;
+        expect(producto).toBeInstanceOf(Object);
+    });
+
+    it("Enviando producto nuevo", async () => {
+        const producto = { nombre: "bate", stock: 5 };
+        const { body: productos } = await request(app).post("/productos").send(producto);
+        const productoEsperado = {id: productos.id, nombre: "bate", stock: 5};
+        console.log(productos)
+        expect(productos.statusCode).toBe(200);
+        expect(productos).toContainEqual(producto);
+    })
 })
